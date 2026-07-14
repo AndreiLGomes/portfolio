@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrei Luciano Gomes — Programador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE;
+    --panel:#FFFFFF;
+    --ink:#1B1E27;
+    --ink-soft:#5B5F6B;
+    --line:#E4E0D6;
+    --indigo:#463AE0;
+    --indigo-deep:#2E24AE;
+    --done:#1B7A4B;
+    --done-bg:#E4F3EA;
+    --progress:#B4590E;
+    --progress-bg:#FBEBDA;
+    --planned:#6B6F7B;
+    --planned-bg:#ECEAE3;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+
+  /* subtle grid texture */
+  .texture{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.35;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+
+  .wrap{
+    position:relative;
+    max-width:920px;
+    margin:0 auto;
+    padding:0 24px 100px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    padding:56px 0 40px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--indigo);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px;height:8px;
+    border-radius:2px;
+    background:var(--indigo);
+    display:inline-block;
+  }
+  .identity{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:32px;
+    flex-wrap:wrap;
+  }
+  h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(34px, 5.2vw, 52px);
+    line-height:1.05;
+    margin:0 0 12px;
+    letter-spacing:-0.01em;
+  }
+  .role{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:20px;
+    color:var(--indigo-deep);
+    margin:0 0 18px;
+  }
+  .bio{
+    font-size:16px;
+    line-height:1.65;
+    color:var(--ink-soft);
+    max-width:56ch;
+    margin:0;
+  }
+  .avatar{
+    flex:0 0 auto;
+    width:88px;height:88px;
+    border-radius:20px;
+    background:linear-gradient(150deg, var(--indigo) 0%, var(--indigo-deep) 100%);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:28px;
+    letter-spacing:0.02em;
+    box-shadow:0 12px 24px -10px rgba(46,36,174,0.45);
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:24px;
+  }
+  .tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:var(--ink-soft);
+  }
+  .tag.pcd{
+    border-color:rgba(70,58,224,0.35);
+    color:var(--indigo-deep);
+    background:rgba(70,58,224,0.06);
+  }
+
+  .links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:28px;
+  }
+  .link-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 18px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    border:1px solid var(--line);
+    background:var(--panel);
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .link-btn:hover{
+    transform:translateY(-2px);
+    border-color:var(--indigo);
+    box-shadow:0 10px 18px -12px rgba(27,30,39,0.35);
+  }
+  .link-btn.primary{
+    background:var(--indigo);
+    border-color:var(--indigo);
+    color:#fff;
+  }
+  .link-btn.primary:hover{
+    background:var(--indigo-deep);
+    border-color:var(--indigo-deep);
+  }
+
+  /* ---------- SECTION LABEL ---------- */
+  .section-label{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin:56px 0 24px;
+  }
+  .section-label h2{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:22px;
+    margin:0;
+  }
+  .section-label .count{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .section-label .rule{
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .skill{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    padding:8px 14px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+    color:var(--ink);
+  }
+
+  /* ---------- BOARD ---------- */
+  .board{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:16px;
+  }
+  @media (max-width:640px){
+    .board{grid-template-columns:1fr;}
+    .identity{flex-direction:column-reverse;}
+  }
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .card.done{
+    box-shadow:0 1px 0 var(--line);
+  }
+  .card.done:hover{
+    transform:translateY(-3px);
+    box-shadow:0 16px 30px -18px rgba(27,30,39,0.4);
+  }
+  .card-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .ticket{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .status{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    padding:4px 10px;
+    border-radius:999px;
+  }
+  .status.done{ color:var(--done); background:var(--done-bg); }
+  .status.progress{ color:var(--progress); background:var(--progress-bg); }
+  .status.planned{ color:var(--planned); background:var(--planned-bg); }
+
+  .card h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:19px;
+    margin:0;
+  }
+  .card p{
+    font-size:14px;
+    line-height:1.55;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  .stack{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:2px;
+  }
+  .stack span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--indigo-deep);
+    background:rgba(70,58,224,0.07);
+    padding:3px 8px;
+    border-radius:6px;
+  }
+  .card-links{
+    display:flex;
+    gap:10px;
+    margin-top:auto;
+    padding-top:6px;
+  }
+  .card-links a{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    font-weight:600;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 12px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    color:var(--ink);
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .card-links a:hover{
+    border-color:var(--indigo);
+    color:var(--indigo-deep);
+  }
+  .card-links a.demo{
+    background:var(--ink);
+    border-color:var(--ink);
+    color:#fff;
+  }
+  .card-links a.demo:hover{
+    background:var(--indigo-deep);
+    border-color:var(--indigo-deep);
+  }
+
+  .card.planned{
+    border-style:dashed;
+    opacity:0.72;
+  }
+  .card.planned .card-links{
+    display:none;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    margin-top:72px;
+    padding-top:28px;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  footer .mono{color:var(--ink-soft);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="texture"></div>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">portfólio&nbsp;/&nbsp;desenvolvimento</p>
+    <div class="identity">
+      <div>
+        <h1>Andrei Luciano Gomes</h1>
+        <p class="role">Programador — Angular · TypeScript · JavaScript</p>
+        <p class="bio">
+          Formado em Análise e Desenvolvimento de Sistemas, com mais de 2 anos de
+          experiência construindo interfaces em Angular. Organizado e focado — trabalho
+          bem com tarefas claras, ambientes com menos ruído e rotinas estruturadas.
+        </p>
+      </div>
+      <div class="avatar">AG</div>
+    </div>
+
+    <div class="tags">
+      <span class="tag pcd">PCD · Autista</span>
+      <span class="tag">Joinville, SC</span>
+      <span class="tag">Scrum &amp; Kanban</span>
+    </div>
+
+    <div class="links">
+      <a class="link-btn primary" href="https://github.com/AndreiLGomes" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-label">
+      <h2>Stack</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="skills">
+      <span class="skill">Angular</span>
+      <span class="skill">TypeScript</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">HTML</span>
+      <span class="skill">CSS / Tailwind</span>
+      <span class="skill">Git &amp; GitHub</span>
+      <span class="skill">Code Review</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">
+      <h2>Projetos</h2>
+      <span class="count mono">1 concluído · 3 em breve</span>
+      <div class="rule"></div>
+    </div>
+
+    <div class="board">
+
+      <!-- PROJETO 1 — CONCLUÍDO -->
+      <div class="card done">
+        <div class="card-top">
+          <span class="ticket">TASK-01 · front-end</span>
+          <span class="status done">Concluído</span>
+        </div>
+        <h3>Angular To-Do List</h3>
+        <p>
+          Lista de tarefas com adicionar, concluir, remover e filtrar (Todas /
+          Pendentes / Concluídas), com persistência automática no navegador.
+        </p>
+        <div class="stack">
+          <span>Angular 19</span>
+          <span>Signals</span>
+          <span>Standalone Components</span>
+          <span>Tailwind CSS</span>
+        </div>
+        <div class="card-links">
+          <a href="https://angular-todo-list-two-navy.vercel.app" target="_blank" rel="noopener" class="demo">↗ Ver projeto</a>
+          <a href="https://github.com/AndreiLGomes/angular-todo-list" target="_blank" rel="noopener">Código-fonte</a>
+        </div>
+      </div>
+
+      <!-- PROJETO 2 — PLANEJADO -->
+      <div class="card planned">
+        <div class="card-top">
+          <span class="ticket">TASK-02 · back-end</span>
+          <span class="status planned">Em breve</span>
+        </div>
+        <h3>API de Tarefas</h3>
+        <p>API REST com CRUD completo, demonstrando lógica de servidor e rotas.</p>
+        <div class="stack">
+          <span>API REST</span>
+          <span>CRUD</span>
+        </div>
+      </div>
+
+      <!-- PROJETO 3 — PLANEJADO -->
+      <div class="card planned">
+        <div class="card-top">
+          <span class="ticket">TASK-03 · banco de dados</span>
+          <span class="status planned">Em breve</span>
+        </div>
+        <h3>Modelagem de Banco de Dados</h3>
+        <p>Schema relacional com múltiplas tabelas, joins e consultas agregadas.</p>
+        <div class="stack">
+          <span>SQL</span>
+          <span>Modelagem</span>
+        </div>
+      </div>
+
+      <!-- PROJETO 4 — PLANEJADO -->
+      <div class="card planned">
+        <div class="card-top">
+          <span class="ticket">TASK-04 · full-stack</span>
+          <span class="status planned">Em breve</span>
+        </div>
+        <h3>Projeto Full-Stack</h3>
+        <p>Front + back + banco de dados integrados de ponta a ponta — o projeto-vitrine.</p>
+        <div class="stack">
+          <span>Angular</span>
+          <span>API</span>
+          <span>SQL</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span class="mono">© 2026 Andrei Luciano Gomes</span>
+    <span class="mono">Joinville, SC — Brasil</span>
+  </footer>
+
+</div>
+</body>
+</html>
