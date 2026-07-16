@@ -31,6 +31,26 @@
     --progress-bg:#FBEBDA;
     --planned:#6B6F7B;
     --planned-bg:#ECEAE3;
+    --shadow-rgb:27,30,39;
+    --texture-opacity:0.35;
+  }
+
+  :root[data-theme="dark"]{
+    --paper:#14151C;
+    --panel:#1D1F29;
+    --ink:#EDEBE3;
+    --ink-soft:#9A9EAC;
+    --line:#2C2F3A;
+    --indigo:#7C72FF;
+    --indigo-deep:#9B93FF;
+    --done:#4ADE94;
+    --done-bg:rgba(74,222,148,0.12);
+    --progress:#FFA557;
+    --progress-bg:rgba(255,165,87,0.12);
+    --planned:#9498A6;
+    --planned-bg:rgba(255,255,255,0.05);
+    --shadow-rgb:0,0,0;
+    --texture-opacity:0.22;
   }
 
   *{box-sizing:border-box;}
@@ -54,7 +74,7 @@
       linear-gradient(var(--line) 1px, transparent 1px),
       linear-gradient(90deg, var(--line) 1px, transparent 1px);
     background-size:64px 64px;
-    opacity:0.35;
+    opacity:var(--texture-opacity);
     mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
   }
 
@@ -174,7 +194,7 @@
   .link-btn:hover{
     transform:translateY(-2px);
     border-color:var(--indigo);
-    box-shadow:0 10px 18px -12px rgba(27,30,39,0.35);
+    box-shadow:0 10px 18px -12px rgba(var(--shadow-rgb),0.35);
   }
   .link-btn.primary{
     background:var(--indigo);
@@ -251,7 +271,7 @@
   }
   .card.done:hover{
     transform:translateY(-3px);
-    box-shadow:0 16px 30px -18px rgba(27,30,39,0.4);
+    box-shadow:0 16px 30px -18px rgba(var(--shadow-rgb),0.4);
   }
   .card-top{
     display:flex;
