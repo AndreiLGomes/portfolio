@@ -365,9 +365,17 @@ h1{
   background:var(--indigo-solid);
   border-color:var(--indigo-solid);
 }
+[data-theme="dark"] .link-btn.primary:hover{
+  background:var(--indigo-deep);
+  border-color:var(--indigo-deep);
+}
 [data-theme="dark"] .card-links a.demo{
   background:var(--indigo-solid);
   border-color:var(--indigo-solid);
+}
+[data-theme="dark"] .card-links a.demo:hover{
+  background:var(--indigo-deep);
+  border-color:var(--indigo-deep);
 }
 
 .card.planned{
