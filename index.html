@@ -59,6 +59,7 @@
     --planned-bg:rgba(255,255,255,0.05);
     --shadow-rgb:0,0,0;
     --texture-opacity:0.22;
+    --indigo-solid:#5B4FE8;
   }
 
   *{box-sizing:border-box;}
@@ -386,6 +387,14 @@
   .card-links a.demo:hover{
     background:var(--indigo-deep);
     border-color:var(--indigo-deep);
+  }
+  [data-theme="dark"] .link-btn.primary{
+    background:var(--indigo-solid);
+    border-color:var(--indigo-solid);
+  }
+  [data-theme="dark"] .card-links a.demo{
+    background:var(--indigo-solid);
+    border-color:var(--indigo-solid);
   }
 
   .card.planned{
