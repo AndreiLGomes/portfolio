@@ -2,6 +2,14 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<script>
+(function(){
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Andrei Luciano Gomes — Programador</title>
 <meta name="description" content="Portfólio de Andrei Luciano Gomes, programador Angular, TypeScript e JavaScript. Projetos de front-end, back-end e modelagem de banco de dados.">
@@ -600,5 +608,25 @@
   </footer>
 
 </div>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  var root = document.documentElement;
+
+  function updateLabel(theme){
+    btn.setAttribute('aria-label', theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro');
+  }
+
+  updateLabel(root.getAttribute('data-theme'));
+
+  btn.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateLabel(next);
+  });
+})();
+</script>
 </body>
 </html>
